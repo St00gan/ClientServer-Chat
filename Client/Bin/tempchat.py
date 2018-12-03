@@ -55,7 +55,7 @@ def program():
             try: 
                 import ipgrab
                 ipname = os.path.join("data","ip.txt")
-                fh = open(ipname, "r")
+                fh = open(ipname, "r+")
                 host_ip = fh.read()
                 fh.close()
             except: 
@@ -119,17 +119,16 @@ def program():
         print("Your IPv4 address is "+host_ip)
         lr = input("Do you want to 1. Login or 2. Register? (Use 1 / 2): ")
         if lr == "1":
-            print(login)
             while (login == "bad") or (login == "register"):
                 import LoginSystem
-                fh = open("login.txt", "r")
+                fh = open("data/login.txt", "r+")
                 login = fh.read()
                 fh.close()
                 print("LOGGED IN")
         elif lr == "2":
             while (login == "bad"):
                 import RegisterSystem
-                fh = open("login.txt", "r")
+                fh = open("data/login.txt", "r+")
                 login = fh.read()
                 fh.close()
                 print("REGISTERED")
