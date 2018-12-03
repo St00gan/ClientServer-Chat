@@ -3,7 +3,7 @@ import getpass
 import hashlib
 s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 4242
-fh = open("ip.txt", "r")
+fh = open("data/ip.txt", "r+")
 ip2 = fh.read()
 ipchange = input("Do you want to manually set IP of server? (Y/N): ")
 if ipchange == "Y" or "y":
@@ -11,9 +11,13 @@ if ipchange == "Y" or "y":
 else:
     ip2 = ip2
 fh.close()
-s2.connect((ip2, port))
+try:
+    s2.connect((ip2, port))
+except:
+    print('PASSWORD SERVER IS OFFLINE RIGHT NOW')
+    exit()
 user = input("Username: ")
-fh = open("user.txt", "w")
+fh = open("data/user.txt", "w")
 fh.writelines(user)
 fh.close()
 pswd = getpass.getpass('Password:').encode("ascii")
@@ -31,6 +35,6 @@ if returned == "success":
     print("Login Success")
 else:
     print("Login Failed")
-fh = open("login.txt", "w")
+fh = open("data/login.txt", "w")
 fh.writelines(returned)
 fh.close()
