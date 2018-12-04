@@ -4,9 +4,9 @@ import sys
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 4242
-fh = open('data',"user.txt","w")
+fh = open("data/user.txt","w")
 fh.close()
-fh = open('data',"user.txt","r+")
+fh = open("data/user.txt","r+")
 uname = fh.read()
 fh.close()
 fh = open("data/ip.txt", "r+")
