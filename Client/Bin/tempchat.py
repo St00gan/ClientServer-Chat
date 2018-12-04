@@ -22,9 +22,15 @@ def program():
     print("Defining Functions")
     try:
         def text():
-            import clientchat
+            try:
+                import clientchat
+            except:
+                print('The Chat system isn\'t working right now. Please try again later')
         def voice():
-            import clientvoice
+            try:
+                import clientvoice
+            except:
+                print('The Voice Chat system isn\'t working right now. Please try again later')
         def settings():
             print("""What setting would you like to change?
         1. IP visibility
@@ -35,9 +41,11 @@ def program():
             if (settingchoice == "1"):
                 clear()
                 visip()
+                settings()
             elif (settingchoice == "2"):
                 clear()
                 userpasssave()
+                settings()
             elif (settingchoice == "3"):
                 clear()
                 program()
@@ -65,6 +73,8 @@ def program():
                     quit
                 elif (repeat == ("Y")) or (repeat == ("y")):
                     hostsearch()
+                elif (repeat == ("OFFLINE")) or (repeat == ("offline")):
+                    host_ip = "127.0.1.1"
         def visip():
             global host_ip
             print("Do you want your ip to be visible? (Y/N)")
@@ -74,6 +84,7 @@ def program():
             elif (vis_ip == ("N")) or (vis_ip == ("n")):
                 host_ip = ("REDACTED")
             else:
+                clear()
                 print("Please use \"Y\" or \"N\"")
                 visip()
         def menu():
@@ -120,18 +131,24 @@ def program():
         lr = input("Do you want to 1. Login or 2. Register? (Use 1 / 2): ")
         if lr == "1":
             while (login == "bad") or (login == "register"):
-                import LoginSystem
-                fh = open("data/login.txt", "r+")
-                login = fh.read()
-                fh.close()
-                print("LOGGED IN")
+                try:
+                    import LoginSystem
+                    fh = open("data/login.txt", "r+")
+                    login = fh.read()
+                    fh.close()
+                    print("LOGGED IN")
+                except:
+                    print('The login system failed. Please try again later')
         elif lr == "2":
             while (login == "bad"):
-                import RegisterSystem
-                fh = open("data/login.txt", "r+")
-                login = fh.read()
-                fh.close()
-                print("REGISTERED")
+                try:
+                    import RegisterSystem
+                    fh = open("data/login.txt", "r+")
+                    login = fh.read()
+                    fh.close()
+                    print("REGISTERED")
+                except:
+                    print('The registration system failed. Please try again later')
     if login == "success":
         print("login success")
     clear()
