@@ -4,10 +4,10 @@ import sys
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 6969
-fh = open('data',"user.txt","r+")
+fh = open("data/user.txt","r+")
 uname = fh.read()
 
-fh = open('data',"ip.txt", "r+")
+fh = open("data/ip.txt", "r+")
 ip = fh.read()
 ipchange = input("Do you want to manually set IP of server? (Y/N): ")
 if ipchange == "Y" or "y":
