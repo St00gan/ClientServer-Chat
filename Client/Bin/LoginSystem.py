@@ -1,6 +1,7 @@
 import socket
 import getpass
 import hashlib
+import sys
 s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 4242
 fh = open("data/ip.txt", "r+")
