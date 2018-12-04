@@ -1,6 +1,7 @@
 import socket
 import getpass
 import hashlib
+import sys
 fh = open("data/login.txt", "w")
 fh.writelines("bad")
 fh.close()
