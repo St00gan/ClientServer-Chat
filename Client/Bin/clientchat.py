@@ -6,14 +6,19 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 6969
 fh = open("data/user.txt","r+")
 uname = fh.read()
+prefix = (uname+'>> ')
 
 fh = open("data/ip.txt", "r+")
 ip = fh.read()
-ipchange = input("Do you want to manually set IP of server? (Y/N): ")
-if ipchange == "Y" or "y":
+ipset = input("Do you want to manually set IP of server? (Y/N): ")
+print(ipset)
+if (ipset == "Y") or (ipset == "y"):
+    print(ipset)
     ip = input("What do you want to set the ip to?: ")
+elif ipset == 'home':
+    ip='127.0.1.1'
 else:
-    ip = ip
+    True
 fh.close()
 
 s.connect((ip, port))
@@ -26,8 +31,8 @@ def receiveMsg(sock):
     while clientRunning and (not serverDown):
         try:
             msg = sock.recv(1024).decode('ascii')
-            if msg.startswith(uname+">>"):
-                msg = msg
+            if msg.startswith(prefix):
+                True
             else:
                 print(msg)
         except:
@@ -36,9 +41,10 @@ def receiveMsg(sock):
 
 threading.Thread(target = receiveMsg, args = (s,)).start()
 while clientRunning:
-    usermsg = input(uname+">> ")
+    print(prefix)
+    usermsg = input(prefix)
     tempMsg = ("**broadcast " + usermsg)
-    msg = uname + '>>' + tempMsg
+    msg = tempMsg
     if '**quit' in msg:
         clientRunning = False
         s.send('**quit'.encode('ascii'))
