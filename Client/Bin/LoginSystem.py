@@ -6,11 +6,6 @@ s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 4242
 fh = open("data/ip.txt", "r+")
 ip2 = fh.read()
-ipchange = input("Do you want to manually set IP of server? (Y/N): ")
-if ipchange == "Y" or "y":
-    ip2 = input("What do you want to set the ip to?: ")
-else:
-    ip2 = ip2
 fh.close()
 try:
     s2.connect((ip2, port))
