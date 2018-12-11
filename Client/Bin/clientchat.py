@@ -1,6 +1,7 @@
 import socket
 import threading
 import sys
+import time
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 6969
@@ -11,12 +12,13 @@ prefix = (uname+'>> ')
 fh = open("data/ip.txt", "r+")
 ip = fh.read()
 ipset = input("Do you want to manually set IP of server? (Y/N): ")
-print(ipset)
 if (ipset == "Y") or (ipset == "y"):
     print(ipset)
     ip = input("What do you want to set the ip to?: ")
 elif ipset == 'home':
     ip='127.0.1.1'
+elif ipset == 'class':
+    ip='172.16.107.106'
 else:
     True
 fh.close()
@@ -31,19 +33,20 @@ def receiveMsg(sock):
     while clientRunning and (not serverDown):
         try:
             msg = sock.recv(1024).decode('ascii')
-            if msg.startswith(prefix):
+            if msg.startswith(uname+'>> '):
                 True
             else:
-                print(msg)
-        except:
+                print('\r'+msg)
+                print(prefix, end='')
+        except: 
             print('Server is Down. You are now Disconnected. Press enter to exit...')
             serverDown = True
 
 threading.Thread(target = receiveMsg, args = (s,)).start()
+time.sleep(0.01)
 while clientRunning:
-    print(prefix)
-    usermsg = input(prefix)
-    tempMsg = ("**broadcast " + usermsg)
+    usermsg = input(uname+'>> ')
+    tempMsg = ("**broadcast"+uname+'>> ' + usermsg)
     msg = tempMsg
     if '**quit' in msg:
         clientRunning = False
@@ -51,3 +54,4 @@ while clientRunning:
         break
     else:
         s.send(msg.encode('ascii'))
+        time.sleep(0.01)
