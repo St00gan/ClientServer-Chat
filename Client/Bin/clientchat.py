@@ -11,16 +11,6 @@ prefix = (uname+'>> ')
 
 fh = open("data/ip.txt", "r+")
 ip = fh.read()
-ipset = input("Do you want to manually set IP of server? (Y/N): ")
-if (ipset == "Y") or (ipset == "y"):
-    print(ipset)
-    ip = input("What do you want to set the ip to?: ")
-elif ipset == 'home':
-    ip='127.0.1.1'
-elif ipset == 'class':
-    ip='172.16.107.106'
-else:
-    True
 fh.close()
 
 s.connect((ip, port))
@@ -36,8 +26,7 @@ def receiveMsg(sock):
             if msg.startswith(uname+'>> '):
                 True
             else:
-                print('\r'+msg)
-                print(prefix, end='')
+                    print('\r'+(' '*20)+'\r'+msg+'\n'+prefix, end='')
         except: 
             print('Server is Down. You are now Disconnected. Press enter to exit...')
             serverDown = True
