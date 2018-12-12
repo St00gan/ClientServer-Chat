@@ -100,13 +100,18 @@ def program():
             print('Would you like to connect to the Primary Server? (Haverhill, UK) (Y/N)')
             sco = input()
             if (sco=='Y') or (sco=='y'):
-                ip = '127.0.1.1'  # PUT MAIN SERVER IP HERE
+                ip = 'comminterm.tk'  # PUT MAIN SERVER IP HERE
                 ipfile = open('data/ip.txt', 'w')
                 ipfile.write(ip)
                 ipfile.close()
             elif (sco=='N') or (sco=='n'):
-                print('What is the IP of the server you want to connect to?')
-                ip = input()
+                ipset = input("What is the IP of the server you want to connect to?: ")
+                if ipset == 'home':
+                    ip='127.0.1.1'
+                elif ipset == 'class':
+                    ip='172.16.107.2'
+                else:
+                    ip = ipset
                 ipfile = open('data/ip.txt', 'w')
                 ipfile.write(ip)
                 ipfile.close()
@@ -114,17 +119,7 @@ def program():
                 clear()
                 print('Please use either \'Y\' or \'N\'')
                 serverip()
-            print('Checking if Server is communicating')
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            try:
-                port = 4242
-                s.connect((ip, port))
-                print('Server Communication Success')
-            except:
-                print('Server Communication Failed')
-                print('Would you like to try another server?(Y/N)')
-
-
+                    
         def menu():
             print("Your IPv4 address is " + host_ip)
             print("Welcome to Comminterm version " + version + " " + user)
@@ -162,6 +157,8 @@ def program():
     clear()
     user = ""
     login = "bad"
+    print('Obtaining Server IP Address')
+    serverip()
     while (login == "failed") or (login == "bad") or (login == "register"):
         clear()
         print("Welcome to Comminterm")
