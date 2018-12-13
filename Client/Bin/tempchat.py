@@ -2,8 +2,8 @@ def program():
     # Project Started 27/09/18
     # This project is meant to be a voice and text chat service that will use low system resources
     # This is gonna be an ambitious project but I want to try as I feel its important
-    # Version 0.9.0 - 05/12/18
-    version = "0.9.0"
+    # Version 0.9.1 - 05/12/18
+    version = "0.9.1"
 
     def clear():
         print('\n' * 1000)
@@ -97,10 +97,10 @@ def program():
 
         def serverip():
             global ip
-            print('Would you like to connect to the Primary Server? (Haverhill, UK) (Y/N)')
+            print('Would you like to connect to the Primary Server? (Amazon Headquarters, London, UK) (Y/N)')
             sco = input()
             if (sco=='Y') or (sco=='y'):
-                ip = 'comminterm.tk'  # PUT MAIN SERVER IP HERE
+                ip = 'ec2-35-177-224-180.eu-west-2.compute.amazonaws.com'  # PUT MAIN SERVER IP HERE
                 ipfile = open('data/ip.txt', 'w')
                 ipfile.write(ip)
                 ipfile.close()
